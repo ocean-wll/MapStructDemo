@@ -1,2 +1,11 @@
 # MapStructDemo
 mapstruct 的demo
+
+mapstruct:
+
+按照日常开发习惯，对于不同领域层使用不同JavaBean对象传输数据，避免相互影响，因此基于数据库实体对象User衍生出比如UserDto、UserVo等对象，于是在不同层之间进行数据传输时，不可避免地需要将这些对象进行互相转换操作。
+常见的转换方式有：
+调用getter/setter方法进行属性赋值
+调用BeanUtil.copyPropertie进行反射属性赋值
+第一种方式不必说，属性多了就需要写一大坨getter/setter代码。第二种方式比第一种方式要简便很多，但是坑巨多，比如sources与target写反，难以定位某个字段在哪里进行的赋值，同时因为用到反射，导致性能也不佳。
+鉴于此，今天写一写第三种对象转换方式，本文使用的是 MapStruct 工具进行转换，MapStruct 原理也很简单，就是在代码编译阶段生成对应的赋值代码，底层原理还是调用getter/setter方法，但是这是由工具替我们完成，MapStruct在不影响性能的情况下，解决了前面两种方式弊端，很赞~
